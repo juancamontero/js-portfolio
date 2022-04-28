@@ -2,10 +2,9 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); //optimization
-const TerserPlugin = require("terser-webpack-plugin"); //optimization
-const Dotenv = require("dotenv-webpack");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+// const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); //optimization
+// const TerserPlugin = require("terser-webpack-plugin"); //optimization
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   // mode: 'production', // LE INDICO EL MODO EXPLICITAMENTE
@@ -19,6 +18,8 @@ module.exports = {
     // EL NOMBRE DEL ARCHIVO FINAL,
     assetModuleFilename: "assets/images/[hash][ext][query]",
   },
+  mode: 'development',
+//   watch: true,
   resolve: {
     extensions: [".js"], // LOS ARCHIVOS QUE WEBPACK VA A LEER
     alias: {
@@ -92,10 +93,6 @@ module.exports = {
       ],
     }),
     new Dotenv(),
-    new CleanWebpackPlugin(),
   ],
-  optimization: {
-    minimize: true,
-    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
-  },
+ 
 };
