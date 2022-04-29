@@ -16,7 +16,7 @@ const Template = async () => {
               <circle cx="50" cy="50" r="40" />
             </svg>
           </div>
-          <p class="card_title">Hi, My name is</p>
+          <p class="card_title">Hi, My nemesis is</p>
           <p class="card_value">${data.name.first} ${data.name.last}</p>
         </div>
         <div class="card_userdata">

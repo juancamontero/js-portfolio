@@ -4,7 +4,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 // const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); //optimization
 // const TerserPlugin = require("terser-webpack-plugin"); //optimization
-const Dotenv = require('dotenv-webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   // mode: 'production', // LE INDICO EL MODO EXPLICITAMENTE
@@ -18,8 +20,9 @@ module.exports = {
     // EL NOMBRE DEL ARCHIVO FINAL,
     assetModuleFilename: "assets/images/[hash][ext][query]",
   },
-  mode: 'development',
-//   watch: true,
+  mode: "development",
+  devtool: 'source-map', //genera mapa del codigo en Json, identifica cada parte del proyecto
+  //   watch: true,
   resolve: {
     extensions: [".js"], // LOS ARCHIVOS QUE WEBPACK VA A LEER
     alias: {
@@ -93,6 +96,12 @@ module.exports = {
       ],
     }),
     new Dotenv(),
+    new BundleAnalyzerPlugin(),
   ],
- 
+  devServer: {
+    static: path.join(__dirname, "dist"), //De donde debe leer
+    compress: true, //[pra usar gzip]
+    historyApiFallback: true,
+    port: 3006,
+  },
 };
